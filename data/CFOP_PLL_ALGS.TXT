@@ -1,0 +1,24 @@
+R, U', R, U, R, U, R, U', R', U', R2
+R2, U, R, U, R', U', R', U', R', U, R'
+M2, U, M2, U, M', U2, M2, U2, M', U2
+M2, U, M2, U2, M2, U, M2
+
+x, R', U, R', D2, R, U', R', D2, R2, x'
+x, R2, D2, R, U, R', D2, R, U', R, x'
+x', R, U', R', D, R, U, R', D', R, U, R', D, R, U', R', D', x
+
+R, U, R', U', R', F, R2, U', R', U', R, U, R', F'
+R', U2, R', d', R', F', R2, U', R', U, R', F, R, U', F
+R', U, L', U2, R, U', R', U2, L, R, U'
+R, U, R', F', R, U, R', U', R', F, R2, U', R', U'
+L, U2, L', U2, L, F', L', U', L, U, L, F, L2, U
+R', U2, R, U2, R', F, R, U, R', U', R', F', R2, U'
+R', U, R', d', R', F', R2, U', R', U, R', F, R, F
+F, R, U', R', U', R, U, R', F', R, U, R', U', R', F, R, F'
+L, U', R, U2, L', U, R', L, U', R, U2, L', U, R', U
+R', U, L', U2, R, U', L, R', U, L', U2, R, U', L, U'
+
+R2, u, R', U, R', U', R, u', R2, y', R', U, R
+L', U', L, y', R2, u, R', U, R, U', R, u', R2
+R2, u', R, U', R, U, R', u, R2, y, R, U', R'
+R, U, R', y', R2, u', R, U', R', U, R', u, R2
