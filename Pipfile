@@ -9,14 +9,10 @@ autopep8 = "*"
 [packages]
 numpy = "*"
 scipy = "*"
-pandas = "*"
-scikit-learn = "*"
 tensorflow = "*"
 keras = "*"
-plotly = "*"
 requests = "*"
 matplotlib = "*"
-seaborn = "*"
 
 [requires]
 python_version = "3.7.2"

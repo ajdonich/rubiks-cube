@@ -1,28 +1,30 @@
 import math
 import numpy as np
 
-GODS_NUMBER = 20
+from VectorCube import VectorCube, SIDES, WHITE_CB, W, ORANGE_CB, O, GREEN_CB, G, RED_CB, R, BLUE_CB, B, YELLOW_CB, Y
 
-# COLORS/SIDES:
-WHITE_CB, W  = 1, 1
-ORANGE_CB, O = 2, 2
-GREEN_CB, G  = 3, 3
-RED_CB, R    = 4, 4
-BLUE_CB, B   = 5, 5
-YELLOW_CB, Y = 6, 6
+# GODS_NUMBER = 20
 
-# COLORS/SIDES in order
-SIDES = [WHITE_CB, ORANGE_CB, GREEN_CB, RED_CB, BLUE_CB, YELLOW_CB]
+# # COLORS/SIDES:
+# WHITE_CB, W  = 1, 1
+# ORANGE_CB, O = 2, 2
+# GREEN_CB, G  = 3, 3
+# RED_CB, R    = 4, 4
+# BLUE_CB, B   = 5, 5
+# YELLOW_CB, Y = 6, 6
 
-# Print convenience maps/fcns
-color_letr_map = { 0:0, WHITE_CB:'W', ORANGE_CB:'O', GREEN_CB:'G', RED_CB:'R', BLUE_CB:'B', YELLOW_CB:'Y' }
-color_name_map = { 0:'N/A', WHITE_CB:'WHITE', ORANGE_CB:'ORANGE', GREEN_CB:'GREEN', RED_CB:'RED', BLUE_CB:'BLUE', YELLOW_CB:'YELLOW' }
+# # COLORS/SIDES in order
+# SIDES = [WHITE_CB, ORANGE_CB, GREEN_CB, RED_CB, BLUE_CB, YELLOW_CB]
 
-def color_letr(fc): return color_letr_map[fc]
-def color_name(fc): return color_name_map[fc]
-def tri_color_name(tc): return (f"({color_letr(tc[0])},{color_letr(tc[1])},{color_letr(tc[2])})")
+# # Print convenience maps/fcns
+# color_letr_map = { 0:0, WHITE_CB:'W', ORANGE_CB:'O', GREEN_CB:'G', RED_CB:'R', BLUE_CB:'B', YELLOW_CB:'Y' }
+# color_name_map = { 0:'N/A', WHITE_CB:'WHITE', ORANGE_CB:'ORANGE', GREEN_CB:'GREEN', RED_CB:'RED', BLUE_CB:'BLUE', YELLOW_CB:'YELLOW' }
 
-class Opticube:
+# def color_letr(fc): return color_letr_map[fc]
+# def color_name(fc): return color_name_map[fc]
+# def tri_color_name(tc): return (f"({color_letr(tc[0])},{color_letr(tc[1])},{color_letr(tc[2])})")
+
+class Opticube(VectorCube):
 #{
     # Solved facelet position vectors, ordered left-to-right top-to-bottom per side
     SOLVED_POS = { WHITE_CB:   np.array([[-2,-2,3],[-2,0,3],[-2,2,3],[0,-2,3],[0,0,3],[0,2,3],[2,-2,3],[2,0,3],[2,2,3]]),
@@ -153,8 +155,7 @@ class Opticube:
 
     # Begin Opticube implementation
     def __init__(self, copycube=None):
-        if copycube is None: self.facelet_matrix = Opticube._facelet_matrix.copy()
-        else: self.facelet_matrix = copycube.facelet_matrix.copy()
+        super(Opticube, self).__init__(copycube)
     
     def isinlayer(self, side):
         return np.argwhere(self.facelet_matrix[2:,:].T.dot(Opticube.SOLVED_POS[side][4]) > 0).flatten()

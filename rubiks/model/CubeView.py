@@ -6,9 +6,9 @@ import matplotlib._color_data as mcd
 from matplotlib.animation import FuncAnimation
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 
-from Observer import Observer
-from SMAdapter import SMAdapter
-from VectorCube import VectorCube, SIDES, WHITE_CB, W, ORANGE_CB, O, GREEN_CB, G, RED_CB, R, BLUE_CB, B, YELLOW_CB, Y
+from rubiks.model.Observer import Observer
+from rubiks.model.SMAdapter import SMAdapter
+from rubiks.model.VectorCube import VectorCube, SIDES, WHITE_CB, W, ORANGE_CB, O, GREEN_CB, G, RED_CB, R, BLUE_CB, B, YELLOW_CB, Y
 
 # Plotting color map
 color_plot_map = { WHITE_CB:  mcd.CSS4_COLORS['ivory'],
@@ -33,6 +33,10 @@ class CubeView(Observer):
     @staticmethod
     def get_poly_verts():
     #{
+        # The verticies for each polygon, when the cube is fixed
+        # (i.e. between move-animations), never change. Only the
+        # color(-ordering) of each polygon changes.
+
         if CubeView._poly_verts is None:
         #{
             verts_list = []
@@ -53,40 +57,16 @@ class CubeView(Observer):
 
         return CubeView._poly_verts
     #}
-    
-    # @staticmethod
-    # def get_divider_verts():
-    # #{
-    #     if CubeView._divider_verts is None:
-    #     #{
-    #         verts_list = []
-    #         for flet in VectorCube._facelet_matrix[:, VectorCube._centers].T:
-    #         #{
-    #             divider = (flet[2:]/3).astype(int)
-    #             dims = np.nonzero(flet[2:]**2 != 9)[0]
-    #             verts = np.meshgrid(divider, [1,1,1,1])[0]
-    #             verts_list.append(verts)
 
-    #             for i, v in enumerate(verts):
-    #                 if i == 0:   v[dims[0]] -= 2; v[dims[1]] -= 2
-    #                 elif i == 1: v[dims[0]] -= 2; v[dims[1]] += 2
-    #                 elif i == 2: v[dims[0]] += 2; v[dims[1]] += 2
-    #                 elif i == 3: v[dims[0]] += 2; v[dims[1]] -= 2
-    #         #}
-            
-    #         # First 6 are "lateral" dividers, last 6 are the "medial" dividers
-    #         CubeView._divider_verts = np.concatenate((verts_list, verts_list))
-    #     #}
-
-    #     return CubeView._divider_verts
-    # #}
-
-    def __init__(self, cube_a=None, sm_adapter=None):
+    def __init__(self, cube_or_adapter):
     #{
-        self.viewable_cube = cube_a
-        self.sm_adapter = sm_adapter
-        if self.sm_adapter is not None:
+        if isinstance(cube_or_adapter, SMAdapter):
+            self.sm_adapter = cube_or_adapter
             self.viewable_cube = self.sm_adapter.local_cube
+        elif isinstance(cube_or_adapter, VectorCube):
+            self.sm_adapter = None
+            self.viewable_cube = cube_or_adapter
+        else: assert False, "ERROR: CubeView.__init__() requires a VectorCube or SMAdapter"
 
         self.reset_snapshots()
         self.reset_animation()
@@ -101,9 +81,9 @@ class CubeView(Observer):
         self.fig_3d = None
         self.fpoly_stack = []
         self.anim_zip_stack = []
-        self.divider_stack = []
+        self.yarn_stack = []
     
-    def press_record(self, stop_recording=False):
+    def record_moves(self, stop_recording=False):
     #{
         if stop_recording: self.sm_adapter.unregister_observer(self)
         else: self.sm_adapter.register_observer(self)
@@ -209,10 +189,11 @@ class CubeView(Observer):
         rects = self.create_patches(flet_idx, seqnumb)
         self.patch_sequence[top].append(rects)
         self.caption_sequence[top].append(caption)
+        return self
     #}
     
     # Displays a move sequence
-    def draw_snapshops(self):
+    def draw_snapshots(self):
     #{
         for row in range(len(self.patch_sequence)):
         #{
@@ -236,6 +217,7 @@ class CubeView(Observer):
         #}
         
         plt.show()
+        return self
     #}
 
     def draw_3d(self):
@@ -259,9 +241,9 @@ class CubeView(Observer):
         plt.show()
     #}
 
-    # Received move-by-move during recording. Note:
-    # should be triggered BEFORE move executed on cube
-    def sm_move_notification(self, rot_mats, mindex, dividx):
+    # Received move-by-move during recording. Note: should be
+    # triggered (via notify_observers) BEFORE move executed on cube
+    def sm_move_notification(self, rot_mats, mindex, alpha_masks):
     #{
         # Create sequence of poly_verts for each step of the move
         # and do stepped rotations on appropriate (mindex) vertices
@@ -271,28 +253,21 @@ class CubeView(Observer):
             step_verts[mindex] = [np.matmul(rmat, verts.T).T for verts in step_verts[mindex]]
             move_verts.append(step_verts)
 
-        # # Diddo for the dividers
-        # move_dverts = []
-        # for rmat in rot_mats:
-        #     div_verts = CubeView.get_divider_verts().copy().astype(float)
-        #     div_verts[dividx] = [np.matmul(rmat, verts.T).T for verts in div_verts[dividx]]
-        #     move_dverts.append(div_verts)
-
         # Get global index/ordering for facelet colors
         gpos = self.sm_adapter.get_global_positions()
         cindex = [np.nonzero(sum(gpos == np.broadcast_to(hpos, (54, 3)).T) == 3)[0][0]
                   for hpos in VectorCube._facelet_matrix[2:].T]
 
+        # Flag color to be used as an alpha at alpha_masks
+        color_alpha = VectorCube._facelet_matrix[0].copy()
+        if alpha_masks is not None and len(alpha_masks) > 0: color_alpha[alpha_masks] = 0
+
         # Store the zipped color ordering and step verticies for animation run
-        self.anim_zip_stack.extend([zip(VectorCube._facelet_matrix[0, cindex], 
-                                    step_verts) for step_verts in move_verts])
-        
-        # # Diddo store on divider stack
-        # self.divider_stack.extend(move_dverts)
+        self.anim_zip_stack.extend([zip(color_alpha[cindex], step_verts) for step_verts in move_verts])
     #}
 
     # Used by matplotlib.animation.FuncAnimation below,
-    # NOT guaranteed to be called only once per run
+    # seemingly NOT guaranteed to be called only once per run
     def init_animation(self):
     #{
         if len(self.fpoly_stack) == 0:
@@ -300,17 +275,16 @@ class CubeView(Observer):
             # Create and init the 54 Poly3DCollection objects
             for color, verts in self.anim_zip_stack[0]:
                 fpoly = Poly3DCollection([verts])
-                fpoly.set_color(color_plot_map[color])
-                fpoly.set_edgecolor('k')
+                if color > 0:
+                    fpoly.set_alpha(1.0)
+                    fpoly.set_facecolor(color_plot_map[color])
+                    fpoly.set_edgecolor('k')
+                else: 
+                    fpoly.set_alpha(0.0) 
+                    fpoly.set_edgecolor(None)
+
                 self.ax_3d.add_collection3d(fpoly)
                 self.fpoly_stack.append(fpoly)
-
-            # # Add black inner/divider polygons
-            # for dverts in self.divider_stack[0]:
-            #     fpoly = Poly3DCollection([dverts])
-            #     fpoly.set_color('k')
-            #     self.ax_3d.add_collection3d(fpoly)
-            #     self.fpoly_stack.append(fpoly)
         #}
 
         return self.fpoly_stack
@@ -322,19 +296,19 @@ class CubeView(Observer):
         # Update Poly3DCollection w/verts and color orderings per frame
         for i, (color, verts) in enumerate(self.anim_zip_stack[frame]):
             self.fpoly_stack[i].set_verts([verts])
-            self.fpoly_stack[i].set_color(color_plot_map[color])
-            self.fpoly_stack[i].set_edgecolor('k')
-        
-        # for j, dverts in enumerate(self.divider_stack[frame]):
-        #     self.fpoly_stack[j+54].set_verts([dverts])
-        #     self.fpoly_stack[j+54].set_color('k')
-        #     self.fpoly_stack[j+54].set_edgecolor('k')
+            if color > 0:
+                self.fpoly_stack[i].set_alpha(1.0)
+                self.fpoly_stack[i].set_facecolor(color_plot_map[color])
+                self.fpoly_stack[i].set_edgecolor('k')
+            else: 
+                self.fpoly_stack[i].set_alpha(0.0)
+                self.fpoly_stack[i].set_edgecolor(None)
 
         return self.fpoly_stack
     #}
 
     def get_animation_3d(self):
-        assert self.fig_3d is not None, "ERROR: called get_animation_3d() before recording moves"
+        assert self.fig_3d is not None, "ERROR: get_animation_3d() called before any moves recorded"
         return FuncAnimation(self.fig_3d, self.get_next_frame, init_func=self.init_animation,
                              frames=len(self.anim_zip_stack), blit=True, repeat=False)
 #}
