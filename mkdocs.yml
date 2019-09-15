@@ -1,0 +1,5 @@
+site_name: AJ Donich Rubiks Cube Solver
+nav:
+  - Home: index.md
+  - demo: demo.md
+theme: 'material'

@@ -5,6 +5,8 @@ verify_ssl = true
 [dev-packages]
 jupyterlab = "*"
 autopep8 = "*"
+mkdocs = "*"
+mkdocs-material = "*"
 
 [packages]
 numpy = "*"
