@@ -1,5 +1,11 @@
-site_name: AJ Donich Rubiks Cube Solver
+site_name: Rubiks Cube Solver
 nav:
   - Home: index.md
-  - demo: demo.md
-theme: 'material'
+  - Demo: demo.md
+theme:
+  name: 'material'
+  favicon: 'assets/images/favicon.ico'
+  logo: 'assets/images/rubik.png'
+  palette:
+    primary: 'grey'
+    accent: 'blue'

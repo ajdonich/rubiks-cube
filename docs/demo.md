@@ -29,11 +29,14 @@ pipenv shell
 jupyter lab
 ```
 
-Then from within the notebook session that is launched in your browser, navigate to the notebooks directory. This directory contains this set of .ipynb files:
+Then from within the notebook session that is launched in your browser, navigate to the notebooks directory. This directory contains this set of demo notbook:
 
-1. Nb1_Intro_Cube_View.ipynb
-2. Nb2_Neural_Networks.ipynb
-3. Nb3_CFOP_Algorithm.ipynb
-4. Nb4_Cycles_Entropy.ipynb
+1. [Intro Cube View](https://github.com/ajdonich/rubiks-cube/blob/master/notebooks/Nb1_Intro_Cube_View.ipynb)
+
+2. [Neural Networks](https://github.com/ajdonich/rubiks-cube/blob/master/notebooks/Nb2_Neural_Networks.ipynb)
+
+3. [CFOP Algorithm](https://github.com/ajdonich/rubiks-cube/blob/master/notebooks/Nb3_CFOP_Algorithm.ipynb)
+
+4. [Cycles Entropy](https://github.com/ajdonich/rubiks-cube/blob/master/notebooks/Nb4_Cycles_Entropy.ipynb)
 
 Please step through these files, titled numerical with the suggested running order. Execute each cell of each notebook in turn, exploring the code execution output. You'll also find a number of markdown cells with further descriptive details. I hope you find the demonstrations interesting and enjoyable!
