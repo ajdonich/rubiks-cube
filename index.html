@@ -1,0 +1,489 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="assets/images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+    
+    
+      
+        <title>Rubik's Cube Solver</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/application.30686662.css">
+      
+        <link rel="stylesheet" href="assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#757575">
+      
+    
+    
+      <script src="assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="grey" data-md-color-accent="blue">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#my-search-for-a-novel-algorithmic-solution-to-rubiks-cube" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="." title="Rubik's Cube Solver" class="md-header-nav__button md-logo">
+          
+            <img src="assets/images/rubik.png" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Rubik's Cube Solver
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Home
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="." title="Rubik's Cube Solver" class="md-nav__button md-logo">
+      
+        <img src="assets/images/rubik.png" width="48" height="48">
+      
+    </a>
+    Rubik's Cube Solver
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Home
+      </label>
+    
+    <a href="." title="Home" class="md-nav__link md-nav__link--active">
+      Home
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#strategy-1-neural-networks-nn-and-deep-reinforcement-learning-drl" class="md-nav__link">
+    Strategy #1: Neural Networks (NN) and Deep Reinforcement Learning (DRL)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#strategy-2-heuristic-guided-upper-confidence-bound-ucb-tree-search" class="md-nav__link">
+    Strategy #2: Heuristic-Guided, Upper-Confidence-Bound (UCB) Tree Search
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#strategy-3-fridrichs-cfop-human-speedcubing-algorithm" class="md-nav__link">
+    Strategy #3: Fridrich’s (CFOP) Human Speedcubing Algorithm
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#strategy-4-entropy-sequence-periodicity-and-dancing-facelets" class="md-nav__link">
+    Strategy #4: Entropy, Sequence Periodicity and Dancing Facelets
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#footnotes" class="md-nav__link">
+    Footnotes:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="implementation/" title="Code Docs" class="md-nav__link">
+      Code Docs
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="quickstart/" title="Quick Start" class="md-nav__link">
+      Quick Start
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#strategy-1-neural-networks-nn-and-deep-reinforcement-learning-drl" class="md-nav__link">
+    Strategy #1: Neural Networks (NN) and Deep Reinforcement Learning (DRL)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#strategy-2-heuristic-guided-upper-confidence-bound-ucb-tree-search" class="md-nav__link">
+    Strategy #2: Heuristic-Guided, Upper-Confidence-Bound (UCB) Tree Search
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#strategy-3-fridrichs-cfop-human-speedcubing-algorithm" class="md-nav__link">
+    Strategy #3: Fridrich’s (CFOP) Human Speedcubing Algorithm
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#strategy-4-entropy-sequence-periodicity-and-dancing-facelets" class="md-nav__link">
+    Strategy #4: Entropy, Sequence Periodicity and Dancing Facelets
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#footnotes" class="md-nav__link">
+    Footnotes:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="my-search-for-a-novel-algorithmic-solution-to-rubiks-cube">My Search for a Novel Algorithmic Solution to Rubik’s Cube</h1>
+<p><img alt="alt text" src="assets/images/cubes_3d.png" /></p>
+<p>This repository contains a collection of Python classes and notebooks for exploring algorithmic solutions to Rubik’s cube. I began the project to experiment with Deep Reinforcement Learning, but I think my most interesting results came from abstracted notions of entropy and periodicity applied to the cube. I originally considered a sliding puzzle for the project, but then opted for Rubik’s cube for some added challenge, which it certainly delivered. After six months of diligent effort, I am yet to develop a novel method that can fully crack it, not to mention that I often felt a sense that a solution was just around the corner, making the puzzle as fun as it was vexing.</p>
+<p>This article describes the solution strategies and results I've traversed thus far (chronologically, despite some arguably ill-conceived, hindsight is 20/20, directions). For discussion of the actual class implementations in the repository, especially those that represent and display the cube (i.e. models and views), please navigate to the Code Docs article.</p>
+<hr />
+<h2 id="strategy-1-neural-networks-nn-and-deep-reinforcement-learning-drl">Strategy #1: Neural Networks (NN) and Deep Reinforcement Learning (DRL)</h2>
+<p><strong><a href="https://github.com/ajdonich/rubiks-cube/blob/master/notebooks/Nb2_Neural_Networks.ipynb">For Demo see Notebook 2: Neural Networks</a></strong></p>
+<p>My initial direction for solving the cube was to emulate a DRL strategy akin to that developed by DeepMind with its AlphaGo<a href="#footnotes"><sup>1</sup></a> program. This same essential strategy is also described by a group out of UC Irvine in their paper, <em>Solving the Rubik’s Cube Without Human Knowledge.</em><a href="#footnotes"><sup>2</sup></a> The strategy gist is to combine a NN with a Monte Carlo Tree Search (MCTS), with implementations varying in NN architecture, training methodology, specifics of tree expansion/rollout, etc.</p>
+<p>Though I eventually made extensive and (moderately) effective use of the tree search, I quickly realized that conventional DRL/RL is not ideally suited for Rubik’s cube because it, RL, depends on initially random moves to produce enough successful outcomes for learning to begin. But unfortunately, a 3x3 cube has 43 quintillion (10^18) possible permutations and <strong>one</strong> solution.<a href="#footnotes"><sup>3</sup></a> Ever solving it with initially random moves is highly improbable to say the least. </p>
+<p>This led me to pursue training a NN independently, potentially to drop into DRL afterword, but primarily just to evaluate whether a viable statistical relationship between cube permutations and solution sequences could be established. To generate a training and validation dataset, I used the fact that a valid solution sequence to a cube can be obtained by simply reversing the moves used to scramble it, and if the scramble involves 20 or fewer (non-redundant) moves, one can also probably safely assume the solution is relatively efficient.<a href="#footnotes"><sup>4</sup></a></p>
+<p>But despite experimenting with a variety of NN architectures and formats for NN input (for example calculating and using certain vector relationships between cube-facelets<a href="#footnotes"><sup>5</sup></a> as input rather than using straight facelet positions), I was unable to train a network that generalized beyond approx. 20% accuracy to a validation set (as depicted in graphs below). I could overfit training data to ~60% accuracy and suspected such network ‘memorization’ could continue with a large enough network, which, if inserted into DRL, could theoretically solve cubes whenever the tree-search found a memorized permutation. I’m not clear whether learning could take hold from there, but regardless, I did not continue with that exploration<a href="#footnotes"><sup>6</sup></a> given my limiting computing power to train a very large network.   </p>
+<p><strong>Figure 1:</strong> <em>The unfortunately dismal training results using Dance Heuristic inputs into a 5-layer, full-connected policy network</em> <br />
+&NewLine; <br />
+<img alt="alt text" src="assets/images/loss_accuracy.png" />   </p>
+<h2 id="strategy-2-heuristic-guided-upper-confidence-bound-ucb-tree-search">Strategy #2: Heuristic-Guided, Upper-Confidence-Bound (UCB) Tree Search</h2>
+<p><strong><a href="https://github.com/ajdonich/rubiks-cube/blob/master/notebooks/Nb1_Intro_Cube_View.ipynb">For Demo see Notebook 1: Intro-Cube-View</a></strong></p>
+<p>My next effort was dedicated to honing a UCB tree search.<a href="#footnotes"><sup>7</sup></a> I began by developing a heuristic function I called Minimum-Distance-Home (see Figure 2 below). A characteristic of the cube is that any given facelet can, independently, be returned to its solved position in at most 2 moves if it is a corner facelet, or 3 moves if it is an edge. The overall heuristic then, is the sum over all facelets of this number-of-moves-to-solved (i.e. 0, 1, 2 or 3) for a given cube permutation.<a href="#footnotes"><sup>8</sup></a> </p>
+<p>On the positive side, I was fairly happy with the performance of my UCB tree search after optimizing my cube class representation to be based almost entirely on NumPy arrays and matrix operations. Still, the size of the search space was too much. Though I was usually able to solve cubes scrambled out 5-6 moves, beyond that the failure rates spiked.   </p>
+<p><a href="https://youtu.be/Ges0wz5SbOM"><img alt="alt text" src="assets/images/mdh_still.jpeg" /></a></p>
+<p><strong>Figure 2:</strong> <em>Still from Minimum-Distance-Home (MDH) animation 
+(click to <a href="https://youtu.be/Ges0wz5SbOM">watch video</a>). 
+Depicts the MDH heuristic as cubes are scrambled and solved/reverse-scrambled.</em></p>
+<blockquote>
+<ol>
+<li><em>The three rings of the target shaped diagram represent the number (0 to 3) of moves a facelet requires to return to its home/solved position (the center of the target representing home/solved)</em>  </li>
+<li><em>The 18 spokes represent possible cube moves (in Half-Turn-Metric, notated by face-color and rotation-angle)</em>   </li>
+<li><em>The small, colored, numbered circles represent the facelets themselves, and the thicker lines represent viable move sequences/trajectories each facelet could traverse to return home</em><a href="#footnotes"><sup>9</sup></a>   </li>
+</ol>
+</blockquote>
+<h2 id="strategy-3-fridrichs-cfop-human-speedcubing-algorithm">Strategy #3: Fridrich’s (CFOP) Human Speedcubing Algorithm</h2>
+<p><strong><a href="https://github.com/ajdonich/rubiks-cube/blob/master/notebooks/Nb3_CFOP_Algorithm.ipynb">For Demo see Notebook 3: CFOP Algorithm</a></strong></p>
+<p>I focused my efforts next on integrating human-understanding/strategy into a machine-learning algorithm.<a href="#footnotes"><sup>10</sup></a> The most popular speedcubing method: CFOP, solves the cube in four, layer-based steps, specifically: 1) the Cross, 2) the First 2 Layers, 3) Orient the Last Layer, and 4) Permute the Last Layer.<a href="#footnotes"><sup>11</sup></a> Thus, an obvious approach seemed to be to develop a solver that mimicked a human speedcuber and then use it to generate a training dataset for each step.<a href="#footnotes"><sup>12</sup></a>  </p>
+<p>There are approximately 80, explicitly defined move sequences for the final OLL and PLL steps; challenging for a human to memorize, but essentially trivial to apply in software. The Cross and F2L steps, however, are not as strictly defined, leading me to adapt my tree search to handle them. After a few weeks of work, I finally succeed in algorithmically solving my first cube! Unfortunately, even searching just through the F2L solution was surprisingly complex.</p>
+<p>Typically search trees would contain 5-15 million nodes, 40-45% of which would be visited. Searches would usually converge in 7-15 (at times up to 20) minutes to solutions that involved 50-70 moves, though some cubes would fail. The large convergence time required per cube thwarted my hopes of ever generating an adequately sized training dataset in a reasonable time frame. Furthermore, the code started to become fairly convoluted and the entire solving strategy piecemeal, in my opinion, as I added the many layers of human-like solving logic necessary to facilitate convergence.</p>
+<p><strong>Figure 3:</strong> <em>Example output of CFOP algorithm solving last few moves of an F2L stage</em> <br />
+&NewLine; <br />
+<img alt="alt text" src="assets/images/F2L_complete.png" /></p>
+<h2 id="strategy-4-entropy-sequence-periodicity-and-dancing-facelets">Strategy #4: Entropy, Sequence Periodicity and Dancing Facelets</h2>
+<p><strong><a href="https://github.com/ajdonich/rubiks-cube/blob/master/notebooks/Nb4_Cycles_Entropy.ipynb">For Demo see Notebook 4: Cycles and Entropy</a></strong></p>
+<p>Unsatisfied with my piecemeal solution thus far and, coincidentally, studying the writings of theoretical physicist, David Bohm, particularly concerning distinctions between creative versus mechanistic modes, I began to develop some tangential experiments and visualizations of the cube. These included creating some atypical video animations of the cube as it was scrambled and then solved and examining a cube’s fundamental periodic/repeatable move sequences.<a href="#footnotes"><sup>13</sup></a>  </p>
+<p><strong>Figure 4:</strong> <em>Graph of rotational periods for the first 160 fundamental two-sided rotation sequences</em> <br />
+&NewLine; <br />
+<img alt="alt text" src="assets/images/cycle_periods.png" /></p>
+<p>I noticed in an animation, in contrast to human strategies, highly efficient solutions rarely move facelets to their solved/home positions, right up until the last few moves, when suddenly the whole cube clicks together. This inspired me to create an “Entropy/Order” heuristic intended to measure a kind of entropy or level of order/disorder of a cube permutation. I awarded 1 point to any solution-pair of facelets<a href="#footnotes"><sup>14</sup></a> that achieved a side-by-side orientation, regardless of where that occurred on the overall surface of the cube, then summed this reward across all facelets.<a href="#footnotes"><sup>15</sup></a>  </p>
+<p>As I worked to integrate these new ideas into my tree search, I was surprised to find almost by accident, a short segment of test code was nearly solving the cube by itself. It simply iterated through periodic move sequences and maximized the Order heuristic. I explored this direction further, developing a more sophisticated heuristic I called Dancing Facelets.<a href="#footnotes"><sup>16</sup></a> It could collapse to the Order heuristic if so configured or could measure more nuanced relationships between facelets such as angular measurements or triad relationships.</p>
+<p>I continued to explore methods of integrating these new components into my tree search or progress with them independently. And I continued to “nearly” solve the cube, but evidently appearances are deceiving with Rubik’s cube; my attempts were clearly converging to local minimums and it wasn’t entirely clear how close or far away true solutions remained. Thus, despite some intriguing results, I’m still at least one more step from victory. Touché, Mr. Rubik.</p>
+<hr />
+<p><a id="footnotes"></a></p>
+<h4 id="footnotes">Footnotes:</h4>
+<blockquote>
+<p><sup>1</sup> See: https://deepmind.com/blog/article/alphago-zero-starting-scratch<br />
+  <sup>2</sup> See: https://arxiv.org/abs/1805.07470. Though the UC Irvine group arrived at a successful implementation and created an online simulator to demonstrate it (see: http://deepcube.igb.uci.edu/), to my knowledge, they have not released their code base and individuals who have tried to replicate their results thus far have been unsuccessful.<br />
+  <sup>3</sup> Despite the colossal size of the permutation space, the maximum possible moves necessary to solve a cube from any position, known as God’s number, is only 20 moves using the Half-Turn-Metric (HTM, i.e. a 180-degree turn counted as one move), or 26 moves using the Quarter-Turn-Metric (QTM) (see: https://www.cube20.org/). Note this also implies that any possible cube permutation is theoretically reachable within a 20-move scramble.<br />
+  <sup>4</sup> From what I can ascertain, this is essentially what the UC Irvine group did as well, though their description is mathematically and pictorially complicated enough that I must admit some confusion in this regard.<br />
+  <sup>5</sup> I use the moniker: facelet, to indicate any of the 54 individual, colored squares that comprise the 3x3 cube, or more specifically the cube is comprised of 6 center facelets, 24 corner facelets, and 24 edge facelets.<br />
+  <sup>6</sup> This strategy seemed kind of like bastardizing a reduction algorithm (see: <a href="https://en.wikipedia.org/wiki/Morwen_Thistlethwaite#Thistlethwaite's_algorithm">Thistlethwaite's Algorithm</a> that permutes a cube through smaller, exhaustively searchable subgroups), and then hopefully leveraging that into learning with DRL.<br />
+  <sup>7</sup>  Implemented essentially as a Monte Carlo Tree Search, minus the random (“Monte Carlo”) rollout step, removed largely due to the improbability of random moves ever achieving a solution state.<br />
+  <sup>8</sup> I eventually abandoned the Minimum-Distance-Home heuristic after recognizing that it becomes less reliable as a cube becomes more scrambled, w/coefficient of variation (CV) nearly 350% across cubes scrambled 25 moves.<br />
+  <sup>9</sup> Animation developed with Python open source package: Manim, developed by Grant Sanderson for his YouTube mathematics education channel. See: https://github.com/3b1b/manim<br />
+  <sup>10</sup> Driven by a desire to explore the third wave, Contextual Model Adaptation, of DARPA’s Three-Wave theory of AI, specifically: 1) Handcrafted Knowledge, 2) Statistical Learning, 3) Context Adaptation. See: https://youtu.be/DARPA_AI_Perspective<br />
+  <sup>11</sup> For a more detailed description of CFOP, see: http://www.rubiksplace.com/speedcubing/guide/<br />
+  <sup>12</sup> I knew getting this plan to generalize well may be tricky, having already established the cube’s resistance to a typical NN training approach, nevertheless, I was essentially stumped and needed to turn some gears somehow.<br />
+  <sup>13</sup> Another interesting characteristic of Rubik’s cube is its wave-like periodicity, meaning that any repetitive sequence of moves will, eventually, return the cube to the same permutation from which it began; for example, one of the most fundamental sequences (aside from a Null/Identity move) is two half-turns of the same side. <br />
+  <sup>14</sup> By a solution-pair I mean, any pair of facelets that is oriented side-by-side when the cube is in its solved state. <br />
+  <sup>15</sup> This resulting Order heuristic proved to be significantly more reliable than the Minimum-Distance-Home. Its CV almost logarithmically shaped and asymptotic to approx. 40% when scrambled to 25 moves. <br />
+  <sup>16</sup> Named Dancing Facelets because it was inspired by a dream that thoroughly demonstrated the twisting, tangling and untangling of partner dancers’ arms as they move in relation to one-another amidst a crowd of other dancers. This heuristic was even more reliable with respect to CV, never exceeding 25%.</p>
+</blockquote>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+        
+          <a href="implementation/" title="Code Docs" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Code Docs
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="assets/javascripts/application.c648116f.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"."}})</script>
+      
+    
+  </body>
+</html>
