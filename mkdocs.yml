@@ -1,7 +1,8 @@
-site_name: Rubiks Cube Solver
+site_name: Rubik's Cube Solver
 nav:
   - Home: index.md
-  - Demo: demo.md
+  - Code Docs: implementation.md
+  - Quick Start: quickstart.md
 theme:
   name: 'material'
   favicon: 'assets/images/favicon.ico'
